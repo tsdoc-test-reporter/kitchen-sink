@@ -1,7 +1,7 @@
 <!doctype html>
 			<html lang="en">
 				<head>
-		<title>TSDoc Test Report</title>
+		<title>Custom Title for Report</title>
 		<style>
 			:root {
 				--light-red: hsl(357, 100%, 92%);
@@ -85,9 +85,39 @@
 				box-sizing: border-box;
 			}
 
+			main {
+				border-bottom: 1px solid var(--test-summary-border-color);
+			}
+
+			details summary { 
+				cursor: pointer;
+			}
+
+			details summary::-webkit-details-marker,
+			details summary::marker {
+			 	display: none; 
+			}
+
+			summary:before {
+				position: absolute;
+				top: 12px;
+				content: "►";
+			}
+
+			details[open] summary:before {
+			 	content: "▼";
+			}
+
+			details[open] .test-summary {
+				border-bottom-width: 1px;
+			}
+
 			.test-summary {
+				position: relative;
+				cursor: pointer;
 				padding: 0.5rem;
 				border: 1px solid var(--test-summary-border-color);
+				border-bottom-width: 0;
 			}
 
 			.test-summary {
@@ -99,6 +129,7 @@
 				justify-content: center;
 				align-items: center;
 				width: 100%;
+				padding-left: 1.25rem;
 				justify-content: space-between;
 			}
 
@@ -124,13 +155,11 @@
 				border-radius: 4px;
 				box-shadow: var(--box-shadow);
 			}
-			.test-summary-status span:first-child {
+			.test-summary-status .meta:first-of-type {
 				border-radius: 4px 0 0 4px;
 				border-left-width: 1px;
 			}
-			.test-summary-status span:last-child {
-				border-radius: 0 4px 4px 0;
-			}
+			
 			.test-summary-passing-tests {
 				border-color: var(--passing-tests-summary-color);
 				background-color:  var(--passing-tests-summary-background-color);
@@ -186,8 +215,10 @@
 				gap: 0.5rem;
 			}
 			.tag {
-				padding: 0.15rem 0.25rem;
+				display: inline-flex;
+				align-items: center;
 				border-radius: 4px;
+				padding: 4px;
 				border: 1px solid var(--tag-border-color);
 				background-color: var(--tag-background-color);
 			}
@@ -230,102 +261,21 @@
 	</head>
 				<body>
 					<main><header>
-		<h1>TSDoc Test Report</h1>
+		<h1>Custom Title for Report</h1>
 	</header>  <details class="test-details">
 				<summary class="test-summary">
 		<div class="test-summary-inner">
-			<h2>common/types.spec.ts</h2>
-			<div>
-				<div class="assertion-tags"><span class="tag">types</span>
-				<div class="test-summary-status">
-		
-		
-		
-		<span aria-hidden="true" class="test-summary-passing-tests">Pass: 1 </span>
-					<span class="sr-only">Passing tests: 1, </span>
-	</div>
-			</div>
-		</div>
-	</summary>
-				<div class="test-assertions">
-		<ul>
-			<li class="assertion status-pass">
-		<span class="assertion-title">
-			
-			map object so keys are the same as values
-		</span>
-		<div class="assertion-tags"><span class="tag">types</span></div>
-		<span aria-hidden="true">✅</span>
-		<span class="sr-only">pass</span>
-	</li>
-		</ul>
-	</div>
-			</details> <details class="test-details">
-				<summary class="test-summary">
-		<div class="test-summary-inner">
-			<h2>utils/validation.spec.ts</h2>
+			<h2>components/App/FilenameAsTitleByDefault.spec.tsx</h2>
 			<div>
 				
 				<div class="test-summary-status">
-		
-		
-		
-		<span aria-hidden="true" class="test-summary-passing-tests">Pass: 4 </span>
-					<span class="sr-only">Passing tests: 4, </span>
-	</div>
-			</div>
-		</div>
-	</summary>
-				<div class="test-assertions">
-		<ul>
-			<li class="assertion status-pass">
-		<span class="assertion-title">
-			
-			value is not required
-		</span>
-		<div class="assertion-tags"><span class="tag">@deprecated</span></div>
-		<span aria-hidden="true">✅</span>
-		<span class="sr-only">pass</span>
-	</li><li class="assertion status-pass">
-		<span class="assertion-title">
-			
-			value is required
-		</span>
-		<div class="assertion-tags"><span class="tag">@deprecated</span></div>
-		<span aria-hidden="true">✅</span>
-		<span class="sr-only">pass</span>
-	</li><li class="assertion status-pass">
-		<span class="assertion-title">
-			
-			value is not required length
-		</span>
-		<div class="assertion-tags"><span class="tag">@beta</span><span class="tag">@internal</span></div>
-		<span aria-hidden="true">✅</span>
-		<span class="sr-only">pass</span>
-	</li><li class="assertion status-pass">
-		<span class="assertion-title">
-			
-			value is required length
-		</span>
-		<div class="assertion-tags"><span class="tag">@beta</span><span class="tag">@internal</span></div>
-		<span aria-hidden="true">✅</span>
-		<span class="sr-only">pass</span>
-	</li>
-		</ul>
-	</div>
-			</details> <details class="test-details">
-				<summary class="test-summary">
-		<div class="test-summary-inner">
-			<h2>components/App/App.spec.tsx</h2>
-			<div>
-				<div class="assertion-tags"><span class="tag">ui</span>
-				<div class="test-summary-status">
-		<span aria-hidden="true" class="test-summary-skipped-tests">Skip: 1 </span>
+		<span aria-hidden="true" class="meta test-summary-skipped-tests">Skip: 1 </span>
 					<span class="sr-only">Skipped tests: 1, </span>
-		<span aria-hidden="true" class="test-summary-todo-tests">Todo: 1 </span>
+		<span aria-hidden="true" class="meta test-summary-todo-tests">Todo: 1 </span>
 					<span class="sr-only">Todo tests: 1, </span>
-		
-		<span aria-hidden="true" class="test-summary-passing-tests">Pass: 1 </span>
+		<span aria-hidden="true" class="meta test-summary-failing-tests">Fail: 1 </span>
+					<span class="sr-only">Failing tests: 1, </span>
+		<span aria-hidden="true" class="meta test-summary-passing-tests">Pass: 1 </span>
 					<span class="sr-only">Passing tests: 1, </span>
 	</div>
 			</div>
@@ -335,7 +285,7 @@
 		<ul>
 			<li class="assertion status-pass">
 		<span class="assertion-title">
-			
+			App » 
 			render h1 title
 		</span>
 		<div class="assertion-tags"><span class="tag">accessibility</span><span class="tag">ui</span></div>
@@ -343,20 +293,111 @@
 		<span class="sr-only">pass</span>
 	</li><li class="assertion status-skip">
 		<span class="assertion-title">
-			
-			render app
+			App » 
+			this is a skipped test
 		</span>
-		<div class="assertion-tags"><span class="tag">@flaky</span><span class="tag">ui</span></div>
+		<div class="assertion-tags"><span class="tag">@parsesCustomTagsLikeThis</span></div>
 		<span aria-hidden="true">⏭️</span>
 		<span class="sr-only">skip</span>
 	</li><li class="assertion status-todo">
 		<span class="assertion-title">
-			
-			render complex accordion with checkboxes that somehow also are buttons
+			App » 
+			this is a todo test
 		</span>
-		<div class="assertion-tags"><span class="tag">ui</span></div>
+		<div class="assertion-tags"></div>
 		<span aria-hidden="true">🔖</span>
 		<span class="sr-only">todo</span>
+	</li><li class="assertion status-fail">
+		<span class="assertion-title">
+			App » 
+			this is a failing test
+		</span>
+		<div class="assertion-tags"><span class="sr-only">convert this to icon</span><span class="tag" aria-hidden="true">🤷🏼</span></div>
+		<span aria-hidden="true">❌</span>
+		<span class="sr-only">fail</span>
+	</li>
+		</ul>
+	</div>
+			</details> <details class="test-details">
+				<summary class="test-summary">
+		<div class="test-summary-inner">
+			<h2>common/handlesDifferentTestBlocks.spec.ts</h2>
+			<div>
+				
+				<div class="test-summary-status">
+		<span aria-hidden="true" class="meta test-summary-skipped-tests">Skip: 2 </span>
+					<span class="sr-only">Skipped tests: 2, </span>
+		
+		
+		<span aria-hidden="true" class="meta test-summary-passing-tests">Pass: 2 </span>
+					<span class="sr-only">Passing tests: 2, </span>
+	</div>
+			</div>
+		</div>
+	</summary>
+				<div class="test-assertions">
+		<ul>
+			<li class="assertion status-pass">
+		<span class="assertion-title">
+			describe.runIf » 
+			test.each: sum 1 + 1 = 2
+		</span>
+		<div class="assertion-tags"></div>
+		<span aria-hidden="true">✅</span>
+		<span class="sr-only">pass</span>
+	</li><li class="assertion status-pass">
+		<span class="assertion-title">
+			describe.runIf » 
+			test.each: sum 3 + 2 = 5
+		</span>
+		<div class="assertion-tags"></div>
+		<span aria-hidden="true">✅</span>
+		<span class="sr-only">pass</span>
+	</li><li class="assertion status-skip">
+		<span class="assertion-title">
+			describe.concurrent » 
+			test.skipIf.each: sum 1 + 1 = 2
+		</span>
+		<div class="assertion-tags"></div>
+		<span aria-hidden="true">⏭️</span>
+		<span class="sr-only">skip</span>
+	</li><li class="assertion status-skip">
+		<span class="assertion-title">
+			describe.concurrent » 
+			test.skipIf.each: sum 3 + 2 = 5
+		</span>
+		<div class="assertion-tags"></div>
+		<span aria-hidden="true">⏭️</span>
+		<span class="sr-only">skip</span>
+	</li>
+		</ul>
+	</div>
+			</details> <details class="test-details">
+				<summary class="test-summary">
+		<div class="test-summary-inner">
+			<h2>Custom title formatting supported</h2>
+			<div>
+				<div class="assertion-tags"><span class="tag">aggregate tags for display in title summary</span>
+				<div class="test-summary-status">
+		
+		
+		
+		<span aria-hidden="true" class="meta test-summary-passing-tests">Pass: 1 </span>
+					<span class="sr-only">Passing tests: 1, </span>
+	</div>
+			</div>
+		</div>
+	</summary>
+				<div class="test-assertions">
+		<ul>
+			<li class="assertion status-pass">
+		<span class="assertion-title">
+			common types » 
+			map object so keys are the same as values
+		</span>
+		<div class="assertion-tags"><span class="tag">aggregate tags for display in title summary</span></div>
+		<span aria-hidden="true">✅</span>
+		<span class="sr-only">pass</span>
 	</li>
 		</ul>
 	</div>
