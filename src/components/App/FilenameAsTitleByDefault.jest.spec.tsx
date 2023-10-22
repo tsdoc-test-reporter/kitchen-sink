@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { describe, test, expect } from "vitest";
+import { describe, test, expect } from "@jest/globals";
 import { App } from "components/App/App";
 
 describe("App", () => {
@@ -19,9 +19,7 @@ describe("App", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Title")
   })
 
-  test.todo("this is a todo test", () => {
-    expect(true).toBeTruthy()
-  })
+  test.todo("this is a todo test")
 
   /**
    * @remarks
