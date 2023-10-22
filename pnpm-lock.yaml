@@ -5,7 +5,7 @@ specifiers:
   '@testing-library/jest-dom': ^6.1.4
   '@testing-library/react': ^14.0.0
   '@testing-library/user-event': ^14.5.1
-  '@tsdoc-test-reporter/vitest': ^0.0.6
+  '@tsdoc-test-reporter/vitest': ^0.0.12
   '@types/react': ^18.2.15
   '@types/react-dom': ^18.2.7
   '@typescript-eslint/eslint-plugin': ^6.0.0
@@ -32,7 +32,7 @@ devDependencies:
   '@testing-library/jest-dom': 6.1.4_vitest@0.34.6
   '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 14.5.1_@testing-library+dom@9.3.3
-  '@tsdoc-test-reporter/vitest': 0.0.6_idhkqxzvcpivzxuvoidfv7jl3a
+  '@tsdoc-test-reporter/vitest': 0.0.12_idhkqxzvcpivzxuvoidfv7jl3a
   '@types/react': 18.2.28
   '@types/react-dom': 18.2.13
   '@typescript-eslint/eslint-plugin': 6.8.0_g5tgkvya3z5bpn5xlbld6exflu
@@ -577,8 +577,8 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
-  /@tsdoc-test-reporter/core/0.0.7_typescript@5.2.2:
-    resolution: {integrity: sha512-rOD77GEk5UeubCnQW5LxSJtfK4zxSuCKBwuJzmkNoLYzdSl6Tf8Rd1OGN0z3xl8NtsZ1JX/LRc9dA9B3zrh19g==}
+  /@tsdoc-test-reporter/core/0.0.12_typescript@5.2.2:
+    resolution: {integrity: sha512-a6z7oKiVKH0f0Mk0AmZeD0kCsFlLEgLYei8Vv2fNLTs1x/+3/P3IZ4CvkNAbUNgjjrPq3SDkXPnmQloJnLI7GQ==}
     peerDependencies:
       typescript: '>= 4.4.x <= 5.2.x'
     dependencies:
@@ -586,14 +586,14 @@ packages:
       typescript: 5.2.2
     dev: true
 
-  /@tsdoc-test-reporter/vitest/0.0.6_idhkqxzvcpivzxuvoidfv7jl3a:
-    resolution: {integrity: sha512-LtnJwDKLkHe4a1m6MZyA+UDf9muE+E6cwSXXldG77m8/mANGeOYupOo7lYcEcXMt3jPm0HqLDadImjA6ZdCqLw==}
+  /@tsdoc-test-reporter/vitest/0.0.12_idhkqxzvcpivzxuvoidfv7jl3a:
+    resolution: {integrity: sha512-XTj51D4nlYUTF/AZwh6zFQ0xLgkxUR6XOvmFc8SRJEW4mo0ucHV9aJ8xft/kjwtOUEgh7Jl50+fZnCihrt5Z9g==}
     peerDependencies:
       typescript: '>= 4.4.x <= 5.2.x'
       vitest: '>=0.32.0'
     dependencies:
       '@microsoft/tsdoc': 0.14.2
-      '@tsdoc-test-reporter/core': 0.0.7_typescript@5.2.2
+      '@tsdoc-test-reporter/core': 0.0.12_typescript@5.2.2
       tslib: 2.6.2
       typescript: 5.2.2
       vitest: 0.34.6_jsdom@22.1.0
