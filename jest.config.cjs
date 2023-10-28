@@ -51,7 +51,7 @@ const tsDocReporterOptions = {
 
 /** @type {import('@jest/types').Config.InitialOptions} */
 module.exports = {
-  testRegex: "(/__tests__/.*|(\\.|/)jest\\.(test|spec))\\.[jt]sx?$",
+  testRegex: "(/__tests__/.*|(\\.|/)jest\\.(test|spec))\\.[cjt]sx?$",
   transform: {
     "^.+\\.(t|j)sx?$": [
       "@swc/jest",

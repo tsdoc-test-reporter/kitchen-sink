@@ -8,7 +8,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: './src/test/vitest-setup.ts',
-    include: ["./src/**/*.vitest.spec.{ts,tsx}"],
+    include: ["./src/**/*.vitest.spec.{ts,tsx,cjs,js,mjs}"],
     reporters: ["default", "./src/test/vitest-reporter.ts"]
   }
 })
