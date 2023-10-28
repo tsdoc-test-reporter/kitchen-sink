@@ -7,6 +7,7 @@ export default class CustomReporter implements Reporter {
 	async onFinished(files?: File[]) {
 		new TsDocTestReporter({
 			outputFileName: 'reports/index',
+			repoUrl: "https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/",
 			customTags: [
 				{
 					tagName: "@parsesCustomTagsLikeThis",
@@ -29,6 +30,11 @@ export default class CustomReporter implements Reporter {
 				}) 
 			},
 			uiOptions: {
+				buildInfo: {
+					text: "Build",
+					url: `https://github.com/tsdoc-test-reporter/kitchen-sink/actions/runs/${process.env.GITHUB_RUN_ID}`,
+					position: "right",
+				},
 				showTagNameOnBlockTags: false,
 				aggregateTagsToFileHeading: "onlyAncestors",
 				htmlTitle: 'Custom Title for Report',
