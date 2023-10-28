@@ -21,12 +21,18 @@ const testData: TestData[] = [
   }
 ]
 
-describe.runIf(true)("describe.runIf", () => {
-  test.each(testData)("test.each: sum $a + $b = $expected", ({ a, b, expected }) => {
-    expect(sum(a, b)).toEqual(expected);
-  })
+/**
+ * @remarks
+ * unit
+ */
+test.each(testData)("test.each", ({ a, b, expected }) => {
+  expect(sum(a, b)).toEqual(expected);
 })
 
+/**
+* @remarks
+* unit
+*/
 describe.shuffle("describe.concurrent", () => {
   test.skipIf(true).each(testData)("test.skipIf.each: sum $a + $b = $expected", ({ a, b, expected }) => {
     expect(sum(a, b)).toEqual(expected);

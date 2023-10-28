@@ -27,6 +27,7 @@ const tsDocReporterOptions = {
     aggregateTagsToFileHeading: "onlyAncestors",
     htmlTitle: 'Custom Title for Report',
     showTextOnTestSummaryMeta: true,
+    expandErrorDetails: true,
     titleFormatter: (title) => {
       if(title.includes("types")) {
         return "Custom title formatting supported"

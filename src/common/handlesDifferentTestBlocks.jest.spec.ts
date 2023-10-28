@@ -1,4 +1,4 @@
-import { describe, test, expect } from '@jest/globals';
+import { test, expect, describe } from '@jest/globals';
 
 const sum = (a: number, b: number): number => a + b;
 
@@ -21,8 +21,20 @@ const testData: TestData[] = [
   }
 ]
 
-describe("describe", () => {
-  test.each(testData)("test.each: sum $a + $b = $expected", ({ a, b, expected }) => {
+/**
+ * @remarks
+ * unit
+ */
+test.each(testData)("test.each", ({ a, b, expected }) => {
+  expect(sum(a, b)).toEqual(expected);
+})
+
+/**
+* @remarks
+* unit
+*/
+describe.skip("describe.concurrent", () => {
+  test.each(testData)("test.skipIf.each: sum $a + $b = $expected", ({ a, b, expected }) => {
     expect(sum(a, b)).toEqual(expected);
   })
 })

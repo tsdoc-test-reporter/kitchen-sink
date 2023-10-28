@@ -9,7 +9,7 @@ describe("App", () => {
    */
   test("render h1 title", () => {
     render(<App />)
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("@test")
+    expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent("@test")
   })
   /**
    * @parsesCustomTagsLikeThis
