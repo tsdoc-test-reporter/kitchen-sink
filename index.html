@@ -2,6 +2,7 @@
 			<html lang="en">
 				<head>
 		<title>Custom Title for Report</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style>
 			:root {
 				--light-red: hsl(357, 100%, 92%);
@@ -48,7 +49,7 @@
 				--tag-border-color: var(--pale-gray);
 
 				--background-color: var(--white);
-				--text-color: var(--black);
+				--text-color: var(--light-black);
 
 				--font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
 					'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -103,24 +104,38 @@
 				margin-bottom: 1rem;
 			}
 
-			.build-info {
+			.build-info, .open-file {
 				display: inline-flex;
 				align-items: center;
 				border-radius: 4px;
 				padding: 4px;
 				background-color: #eee;
 				margin-bottom: 4px;
-				border-bottom: none;
 				text-decoration: underline;
+			}
+
+			.open-file {
+				margin: 0 0.25rem 0 auto;
+				text-decoration: none;
+			}
+
+			.build-info {
+				border-bottom: none;
+			}
+
+			.open-file a {
+				text-decoration: none;
+				border-bottom: 1px solid var(--text-color);
+				padding-bottom: 1px;
+			}
+
+			.open-file svg {
+				margin: 0 0 4px 4px;
 			}
 
 			.column {
 				flex-direction: column;
 				align-items: flex-start;
-			}
-
-			main {
-				border-bottom: 1px solid var(--test-summary-border-color);
 			}
 
 			details summary { 
@@ -136,6 +151,8 @@
 			summary:before {
 				position: absolute;
 				content: "►";
+				margin-top: 4px;
+				font-size: 0.85rem;
 			}
 
 			details[open] > summary:before {
@@ -143,6 +160,15 @@
 			}
 
 			details[open] .test-summary {
+				border-bottom-width: 1px;
+			}
+
+			.test-details:first-of-type .test-summary {
+				border-radius: 4px 4px 0 0;
+			}
+
+			.test-details:last-of-type .test-summary {
+				border-radius: 0 0 4px 4px;
 				border-bottom-width: 1px;
 			}
 
@@ -154,10 +180,6 @@
 				border-bottom-width: 0;
 			}
 
-			.test-summary:before {
-				margin-top: 2px;
-			}
-
 			.test-summary-inner {
 				display: inline-flex;
 				justify-content: center;
@@ -165,6 +187,7 @@
 				width: 100%;
 				padding-left: 1.25rem;
 				justify-content: space-between;
+				flex-wrap: wrap;
 			}
 
 			.test-summary h2  {
@@ -301,20 +324,46 @@
 				width: 1px !important;
 				white-space: nowrap !important;
 			}
+
+			@media only screen and (max-width: 600px) {
+				.test-summary-inner {
+					flex-direction: column;
+					justify-content: flex-start;
+					align-items: flex-start;
+				}
+
+				.test-summary-inner > * {
+					margin-top: 0.25rem;
+				}
+
+				.open-file {
+					margin-left: 0;
+				}
+
+				.assertion {
+					grid-template-columns: 1fr;
+				}
+
+				.assertion-tags {
+					justify-content: flex-start;
+				}
+			}
 			
 		</style>
 	</head>
 				<body>
 					<main><header>
 		<h1>Custom Title for Report</h1>
-		<a class="build-info" href="https://github.com/tsdoc-test-reporter/kitchen-sink/actions/runs/6682430374" rel="noreferrer" target="_blank">
+		<a class="build-info" href="https://github.com/tsdoc-test-reporter/kitchen-sink/actions/runs/6683088343" rel="noreferrer" target="_blank">
 			Build
 		</a>
 	</header>  <details class="test-details">
 				<summary class="test-summary">
 		<div class="test-summary-inner">
-<h2><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/components/App/FilenameAsTitleByDefault.vitest.spec.tsx" rel="noreferrer" target="_blank">components/App/FilenameAsTitleByDefault.vitest.spec.tsx</a>
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></h2>	<div>
+			<h2>components/App/FilenameAsTitleByDefault.vitest.spec.tsx</h2>
+<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/components/App/FilenameAsTitleByDefault.vitest.spec.tsx" rel="noreferrer" target="_blank">Open file</a> 
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
+			<div>
 				
 				<div class="test-summary-status">
 		<span aria-hidden="true" class="meta test-summary-skipped-tests">Skip: 1 </span>
@@ -382,8 +431,10 @@ Unable to find an accessible element with the role &quot;heading&quot;<br/><br/>
 			</details> <details class="test-details">
 				<summary class="test-summary">
 		<div class="test-summary-inner">
-<h2><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/common/handlesDifferentTestBlocks.vitest.spec.ts" rel="noreferrer" target="_blank">common/handlesDifferentTestBlocks.vitest.spec.ts</a>
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></h2>	<div>
+			<h2>common/handlesDifferentTestBlocks.vitest.spec.ts</h2>
+<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/common/handlesDifferentTestBlocks.vitest.spec.ts" rel="noreferrer" target="_blank">Open file</a> 
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
+			<div>
 				<div class="assertion-tags"><span class="tag">unit</span>
 				<div class="test-summary-status">
 		<span aria-hidden="true" class="meta test-summary-skipped-tests">Skip: 2 </span>
@@ -440,8 +491,10 @@ Unable to find an accessible element with the role &quot;heading&quot;<br/><br/>
 			</details> <details class="test-details">
 				<summary class="test-summary">
 		<div class="test-summary-inner">
-<h2><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/Custom title formatting supported" rel="noreferrer" target="_blank">Custom title formatting supported</a>
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></h2>	<div>
+			<h2>Custom title formatting supported</h2>
+<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/Custom title formatting supported" rel="noreferrer" target="_blank">Open file</a> 
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
+			<div>
 				<div class="assertion-tags"><span class="tag">aggregate tags for display in title summary</span>
 				<div class="test-summary-status">
 		
@@ -470,8 +523,10 @@ Unable to find an accessible element with the role &quot;heading&quot;<br/><br/>
 			</details> <details class="test-details">
 				<summary class="test-summary">
 		<div class="test-summary-inner">
-<h2><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/commonjs.vitest.spec.cjs" rel="noreferrer" target="_blank">js/commonjs.vitest.spec.cjs</a>
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></h2>	<div>
+			<h2>js/commonjs.vitest.spec.cjs</h2>
+<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/commonjs.vitest.spec.cjs" rel="noreferrer" target="_blank">Open file</a> 
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
+			<div>
 				
 				<div class="test-summary-status">
 		
@@ -500,8 +555,10 @@ Unable to find an accessible element with the role &quot;heading&quot;<br/><br/>
 			</details> <details class="test-details">
 				<summary class="test-summary">
 		<div class="test-summary-inner">
-<h2><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/javascript.vitest.spec.js" rel="noreferrer" target="_blank">js/javascript.vitest.spec.js</a>
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></h2>	<div>
+			<h2>js/javascript.vitest.spec.js</h2>
+<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/javascript.vitest.spec.js" rel="noreferrer" target="_blank">Open file</a> 
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
+			<div>
 				
 				<div class="test-summary-status">
 		
@@ -530,8 +587,10 @@ Unable to find an accessible element with the role &quot;heading&quot;<br/><br/>
 			</details> <details class="test-details">
 				<summary class="test-summary">
 		<div class="test-summary-inner">
-<h2><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/module.vitest.spec.mjs" rel="noreferrer" target="_blank">js/module.vitest.spec.mjs</a>
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></h2>	<div>
+			<h2>js/module.vitest.spec.mjs</h2>
+<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/module.vitest.spec.mjs" rel="noreferrer" target="_blank">Open file</a> 
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
+			<div>
 				
 				<div class="test-summary-status">
 		
