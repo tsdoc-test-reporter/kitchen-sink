@@ -8,8 +8,8 @@ specifiers:
   '@testing-library/jest-dom': ^6.1.4
   '@testing-library/react': ^14.0.0
   '@testing-library/user-event': ^14.5.1
-  '@tsdoc-test-reporter/jest': ^0.0.24
-  '@tsdoc-test-reporter/vitest': ^0.0.24
+  '@tsdoc-test-reporter/jest': ^0.0.25
+  '@tsdoc-test-reporter/vitest': ^0.0.25
   '@types/react': ^18.2.15
   '@types/react-dom': ^18.2.7
   '@typescript-eslint/eslint-plugin': ^6.0.0
@@ -41,8 +41,8 @@ devDependencies:
   '@testing-library/jest-dom': 6.1.4_obcvuevvvfz46t2rpxc5bi3nwm
   '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 14.5.1_@testing-library+dom@9.3.3
-  '@tsdoc-test-reporter/jest': 0.0.24_typescript@5.2.2
-  '@tsdoc-test-reporter/vitest': 0.0.24_idhkqxzvcpivzxuvoidfv7jl3a
+  '@tsdoc-test-reporter/jest': 0.0.25_typescript@5.2.2
+  '@tsdoc-test-reporter/vitest': 0.0.25_idhkqxzvcpivzxuvoidfv7jl3a
   '@types/react': 18.2.28
   '@types/react-dom': 18.2.13
   '@typescript-eslint/eslint-plugin': 6.8.0_g5tgkvya3z5bpn5xlbld6exflu
@@ -1196,8 +1196,8 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
-  /@tsdoc-test-reporter/core/0.0.24_typescript@5.2.2:
-    resolution: {integrity: sha512-BPoIEnIQV2MWvBVjL8a5gmT+1bBtkS/GWdFPalOvhVMRRDxp6mDtIK9Thpu8ofdYe9KkMTS+2hV8OmUfy5+D/w==}
+  /@tsdoc-test-reporter/core/0.0.25_typescript@5.2.2:
+    resolution: {integrity: sha512-zMTukvLKtEsOVYux1IjckbdKSDgLRdbuLih0TbjqUZcwJfY8Yu1FxtFWSwHkzCxa1cWXYMWhPxFnzGlZDMVHQg==}
     peerDependencies:
       typescript: '>= 4.4.x <= 5.2.x'
     dependencies:
@@ -1205,29 +1205,29 @@ packages:
       typescript: 5.2.2
     dev: true
 
-  /@tsdoc-test-reporter/jest/0.0.24_typescript@5.2.2:
-    resolution: {integrity: sha512-L5prjayJznLOmX3Cvd6Dc+BnpAgGiBPLQSBKVbw+fTq09W90VL5bz43xo37AlQRN+YZtqANU/smAeYj0sJbysw==}
+  /@tsdoc-test-reporter/jest/0.0.25_typescript@5.2.2:
+    resolution: {integrity: sha512-/RktitgFoHkl1iRMPHC8mHNUf57ju8yGWEj4UqCqmblO8XkxAKFC9cYh8ZDSnxTXsQLVaKCj1NoaB/hRDzoK0Q==}
     peerDependencies:
       typescript: '>= 4.4.x <= 5.2.x'
     dependencies:
       '@jest/reporters': 29.7.0
       '@jest/test-result': 29.7.0
       '@microsoft/tsdoc': 0.14.2
-      '@tsdoc-test-reporter/core': 0.0.24_typescript@5.2.2
+      '@tsdoc-test-reporter/core': 0.0.25_typescript@5.2.2
       typescript: 5.2.2
     transitivePeerDependencies:
       - node-notifier
       - supports-color
     dev: true
 
-  /@tsdoc-test-reporter/vitest/0.0.24_idhkqxzvcpivzxuvoidfv7jl3a:
-    resolution: {integrity: sha512-NrIkEfQ9IonECcJPK9FT/hcW2pFmxiTpdHAJTLoTZyXqrNzyqOxyNNhjWIUviM891RGU1pRGOY0Qn/ZPX0+cGg==}
+  /@tsdoc-test-reporter/vitest/0.0.25_idhkqxzvcpivzxuvoidfv7jl3a:
+    resolution: {integrity: sha512-gr+h+tSNrXA6uISx9fALGe4/wHHyPSS4PxXutX3MT2Uidxn7ojJ9kJH33nfobzT5wQOW+rkAFdbTgyYesSXtcg==}
     peerDependencies:
       typescript: '>= 4.4.x <= 5.2.x'
       vitest: '>=0.32.0'
     dependencies:
       '@microsoft/tsdoc': 0.14.2
-      '@tsdoc-test-reporter/core': 0.0.24_typescript@5.2.2
+      '@tsdoc-test-reporter/core': 0.0.25_typescript@5.2.2
       tslib: 2.6.2
       typescript: 5.2.2
       vitest: 0.34.6_jsdom@22.1.0
