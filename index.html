@@ -1,8 +1,8 @@
 <!doctype html>
-			<html lang="en">
-				<head>
+		<html lang="en">
+			<head>
 		<title>Custom Title for Report</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<style>
 			:root {
 				--light-red: hsl(357, 100%, 92%);
@@ -12,8 +12,9 @@
 				--light-green: hsl(114, 31%, 80%);
 				--dark-green: hsl(138, 89%, 10%);
 
-				--light-blue: hsl(222, 100%, 98%);
-				--dark-blue: hsl(202, 32%, 15%);
+				--light-blue: hsl(208, 100%, 97%);
+				--dark-blue:  hsl(207, 46%, 32%);
+				--darker-blue: hsl(202, 32%, 15%);
 
 				--dark-purple: hsl(300, 79%, 26%);
 				--light-purple: hsl(299, 100%, 92%);
@@ -24,29 +25,29 @@
 				--black: hsl(0, 0%, 25%);
 				--light-black: hsl(0, 0%, 33%);
 				--lighter-black: hsl(0, 0%, 40%);
+				--light-gray: hsl(0, 0%, 98%);
 				--pale-gray: hsl(0, 0%, 83%);
+				--gray:	hsl(0, 0%, 93%);
 				--white: hsl(0, 100%, 100%);
 
 				--test-summary-border-color: var(--pale-gray);
-				--list-even-odd-background-color: var(--light-blue);
-				--list-border-color: var(--light-blue);
+				--list-border-color: var(--pale-gray);
 				--list-text-color: var(--light-black);
-				--list-ancestor-text-color: var(--lighter-black);
 
-				--passing-tests-summary-color: var(--dark-green);
-				--passing-tests-summary-background-color: var(--light-green);
-				--failing-tests-summary-color: var(--dark-red);
-				--failing-tests-summary-background-color: var(--light-red);
-				--todo-tests-summary-color: var(--dark-purple);
-				--todo-tests-summary-background-color: var(--light-purple);
-				--skipped-tests-summary-color: var(--dark-yellow);
-				--skipped-tests-summary-background-color: var(--light-yellow);
+				--pass-color: var(--dark-green);
+				--pass-background: var(--light-green);
+				--fail-color: var(--dark-red);
+				--fail-background: var(--light-red);
+				--todo-color: var(--dark-purple);
+				--todo-background: var(--light-purple);
+				--skip-color: var(--dark-yellow);
+				--skip-background: var(--light-yellow);
 
-				--code-background-color: var(--dark-blue);
+				--code-background-color: var(--darker-blue);
 
-				--tag-background-color: var(--white);
-				--tag-text-color: var(--black);
-				--tag-border-color: var(--pale-gray);
+				--tag-background-color: var(--light-blue);
+				--tag-text-color: var(--dark-blue);
+				--tag-border-color: var(--dark-blue);
 
 				--background-color: var(--white);
 				--text-color: var(--light-black);
@@ -109,18 +110,22 @@
 				align-items: center;
 				border-radius: 4px;
 				padding: 4px;
-				background-color: #eee;
+				background-color: var(--gray);
 				margin-bottom: 4px;
 				text-decoration: underline;
 			}
 
 			.open-file {
-				margin: 0 0.25rem 0 auto;
 				text-decoration: none;
 			}
 
 			.build-info {
 				border-bottom: none;
+			}
+
+			.build-info svg {
+				margin-left: 4px;
+				margin-bottom: 2px;
 			}
 
 			.open-file a {
@@ -138,14 +143,14 @@
 				align-items: flex-start;
 			}
 
-			details summary { 
+			details summary {
 				cursor: pointer;
 				list-style: none;
 			}
 
 			details summary::-webkit-details-marker,
 			details summary::marker {
-			 	display: none; 
+			 	display: none;
 			}
 
 			summary:before {
@@ -153,14 +158,11 @@
 				content: "►";
 				margin-top: 4px;
 				font-size: 0.85rem;
+				transition: all 250ms;
 			}
 
 			details[open] > summary:before {
-			 	content: "▼";
-			}
-
-			details[open] .test-summary {
-				border-bottom-width: 1px;
+				transform: rotate(90deg);
 			}
 
 			.test-details:first-of-type .test-summary {
@@ -170,6 +172,11 @@
 			.test-details:last-of-type .test-summary {
 				border-radius: 0 0 4px 4px;
 				border-bottom-width: 1px;
+			}
+
+			details[open].test-details .test-summary {
+				border-bottom-width: 1px;
+				border-bottom-left-radius: 4px;
 			}
 
 			.test-summary {
@@ -182,18 +189,38 @@
 
 			.test-summary-inner {
 				display: inline-flex;
-				justify-content: center;
 				align-items: center;
 				width: 100%;
 				padding-left: 1.25rem;
 				justify-content: space-between;
+				gap: 0.5rem;
 				flex-wrap: wrap;
+			}
+
+			.test-summary-primary {
+				display: flex;
+				flex-direction: column;
+				gap: 0.25rem;
+			}
+
+			.test-summary-title {
+				display: flex;
+				gap: 0.25rem;
+				align-items: baseline;
+				flex-wrap: wrap;
+			}
+
+			.test-summary-secondary {
+				display: flex;
+				flex-direction: row;
+				gap: 0.25rem;
 			}
 
 			.test-summary h2  {
 				display: inline;
 				margin: 0;
-				font-size: 1rem;
+				font-size: 1.1rem;
+				word-break: break-word;
 			}
 			.aggregated-tags {
 				margin-left: auto;
@@ -201,64 +228,77 @@
 				display: inline-flex;
 				justify-content: flex-end;
 				gap: 0.5rem;
-			}
-			.test-summary-status span {
-				padding: 0.25rem 0.5rem;
-				border-style: solid;
-				border-width: 1px 1px 1px 0;
+				margin-right: 0.5rem;
 			}
 			.test-summary-status {
 				display: flex;
 				border-radius: 4px;
 				box-shadow: var(--box-shadow);
 			}
-			.test-summary-status .meta:first-of-type {
+			.meta {
+				padding: 0.25rem 0.5rem;
+				border-style: solid;
+				border-width: 1px 1px 1px 0;
+			}
+			.test-summary .meta:first-of-type {
 				border-radius: 4px 0 0 4px;
 				border-left-width: 1px;
 			}
-			
-			.test-summary-passing-tests {
-				border-color: var(--passing-tests-summary-color);
-				background-color:  var(--passing-tests-summary-background-color);
-				color: var(--passing-tests-summary-color);
+			.test-summary .meta:last-of-type {
+				border-radius: 0 4px 4px 0;
+			}
+			.test-summary .meta:only-of-type {
+				border-radius: 4px;
 			}
 
-			.test-summary-failing-tests {
-				border-color: var(--failing-tests-summary-color);
-				background-color:  var(--failing-tests-summary-background-color);
-				color: var(--failing-tests-summary-color);
+			.assertion-secondary .meta {
+				border-left-width: 1px;
+				border-radius: 4px;
 			}
 
-			.test-summary-todo-tests {
-				border-color: var(--todo-tests-summary-color);
-				background-color:  var(--todo-tests-summary-background-color);
-				color: var(--todo-tests-summary-color);
+			.pass-tests {
+				border-color: var(--pass-color);
+				background-color:  var(--pass-background);
+				color: var(--pass-color);
 			}
 
-			.test-summary-skipped-tests {
-				border-color: var(--skipped-tests-summary-color);
-				background-color:  var(--skipped-tests-summary-background-color);
-				color: var(--skipped-tests-summary-color);
+			.fail-tests {
+				border-color: var(--fail-color);
+				background-color:  var(--fail-background);
+				color: var(--fail-color);
+			}
+
+			.todo-tests {
+				border-color: var(--todo-color);
+				background-color:  var(--todo-background);
+				color: var(--todo-color);
+			}
+
+			.skip-tests {
+				border-color: var(--skip-color);
+				background-color:  var(--skip-background);
+				color: var(--skip-color);
 			}
 			.assertion {
 				padding: 0.5rem;
 				padding-left: 1.5rem;
-				display: grid;
-				align-items: center;
-				grid-template-columns: 3fr 1fr 1.15rem;
-				gap: 0.5rem;
 				color: var(--list-text-color);
 				border-left: 1px solid var(--list-border-color);
 				border-right: 1px solid var(--list-border-color);
+				margin-left: 0.25rem;
+				background-color: var(--light-gray)
 			}
-			.assertion-ancestor {
-				color: var(--list-ancestor-text-color);
+			.assertion-details {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 			}
-			.assertion.status-failed .assertion-ancestor {
-				color: var(--list-text-color);
-			}
-			.assertion:nth-of-type(odd) {
-				background-color: var(--list-even-odd-background-color);
+			.assertion-primary {
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				align-items: center;
 			}
 			.assertion:not(:last-child) {
 				border-bottom: 1px solid var(--list-border-color);
@@ -268,7 +308,6 @@
 			}
 			.assertion-tags {
 				display: inline-flex;
-				justify-content: flex-end;
 				gap: 0.5rem;
 			}
 			.tag {
@@ -278,6 +317,7 @@
 				padding: 4px;
 				border: 1px solid var(--tag-border-color);
 				background-color: var(--tag-background-color);
+				color: var(--tag-text-color);
 			}
 			.assertion-error-content {
 				padding: 0.5rem;
@@ -288,9 +328,9 @@
 				border-radius: 4px;
 			}
 			.assertion-error-details {
-				grid-column: 1/3;
 				width: 100%;
 				position: relative;
+				margin-top: 0.5rem;
 			}
 
 			.assertion-error-details summary:before {
@@ -324,298 +364,418 @@
 				width: 1px !important;
 				white-space: nowrap !important;
 			}
-
-			@media only screen and (max-width: 600px) {
-				.test-summary-inner {
-					flex-direction: column;
-					justify-content: flex-start;
-					align-items: flex-start;
-				}
-
-				.test-summary-inner > * {
-					margin-top: 0.25rem;
-				}
-
-				.open-file {
-					margin-left: 0;
-				}
-
-				.assertion {
-					grid-template-columns: 1fr;
-				}
-
-				.assertion-tags {
-					justify-content: flex-start;
-				}
-			}
 			
 		</style>
 	</head>
-				<body>
-					<main><header>
-		<h1>Custom Title for Report</h1>
-		<a class="build-info" href="https://github.com/tsdoc-test-reporter/kitchen-sink/actions/runs/6683088343" rel="noreferrer" target="_blank">
-			Build
-		</a>
-	</header>  <details class="test-details">
-				<summary class="test-summary">
+			<body>
+				<main>
+					<header class="">
+		<h1>Custom Title for Report</h1><a class="build-info" href="https://github.com/tsdoc-test-reporter/kitchen-sink/actions/runs/6685266536" rel="noreferrer" target="_blank">Build
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></a>
+	</header>
+					 <details class="test-details">
+					<summary class="test-summary">
 		<div class="test-summary-inner">
-			<h2>components/App/FilenameAsTitleByDefault.vitest.spec.tsx</h2>
-<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/components/App/FilenameAsTitleByDefault.vitest.spec.tsx" rel="noreferrer" target="_blank">Open file</a> 
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
-			<div>
+			<div class="test-summary-primary">
+				<div class="test-summary-title">
+				<h2>components/App/FilenameAsTitleByDefault.vitest.spec.tsx</h2>
+				<span class="open-file"
+							><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/components/App/FilenameAsTitleByDefault.vitest.spec.tsx" rel="noreferrer" target="_blank">Open file</a>
+							
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span
+						>
+				</div>
 				
-				<div class="test-summary-status">
-		<span aria-hidden="true" class="meta test-summary-skipped-tests">Skip: 1 </span>
-					<span class="sr-only">Skipped tests: 1, </span>
-		<span aria-hidden="true" class="meta test-summary-todo-tests">Todo: 1 </span>
-					<span class="sr-only">Todo tests: 1, </span>
-		<span aria-hidden="true" class="meta test-summary-failing-tests">Fail: 2 </span>
-					<span class="sr-only">Failing tests: 2, </span>
+			</div>
+			<div class="test-summary-secondary">
+
+			<div class="test-summary-status">
+		<div class="meta skip-tests"><span aria-hidden="true"
+						>Skip: 1
+					</span>
+					<span class="sr-only">Skipped tests: 1, </span></div>
+		<div class="meta todo-tests"><span aria-hidden="true"
+						>Todo: 1
+					</span>
+					<span class="sr-only">Todo tests: 1, </span></div>
+		<div class="meta fail-tests"><span aria-hidden="true"
+						>Fail: 2
+					</span>
+					<span class="sr-only">Failing tests: 2, </span></div>
 		
 	</div>
 			</div>
 		</div>
 	</summary>
-				<div class="test-assertions">
+					<div class="test-assertions">
 		<ul>
 			<li class="assertion status-fail">
-		<span class="assertion-title">
-			App » 
-			render h1 title
-		</span>
-		<div class="assertion-tags"><span class="tag">accessibility</span><span class="tag">ui</span></div>
-		<span aria-hidden="true">❌</span>
-		<span class="sr-only">fail</span>
-<details open class="assertion-error-details">
- <summary><p>Error details</p></summary>
-<div class="assertion-error-content">
-Unable to find an accessible element with the role &quot;heading&quot;<br/><br/>Here are the accessible roles:<br/><br/>  heading:<br/><br/>  Name &quot;@ test&quot;:<br/>  <span style="color:#0AA">&lt;h1 /&gt;<span style="color:#FFF"><br/><br/>  --------------------------------------------------<br/><br/>Ignored nodes: comments, script, style<br/><span style="color:#0AA">&lt;body&gt;<span style="color:#FFF"><br/>  <span style="color:#0AA">&lt;div&gt;<span style="color:#FFF"><br/>    <span style="color:#0AA">&lt;h1&gt;<span style="color:#FFF"><br/>      <span style="color:#0AA">&lt;span<span style="color:#FFF"><br/>        <span style="color:#A50">style<span style="color:#FFF">=<span style="color:#99C794">&quot;color: rgb(80, 165, 165);&quot;<span style="color:#FFF"><br/>      <span style="color:#0AA">&gt;<span style="color:#FFF"><br/>        </span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>@<br/>      <span style="color:#0AA">&lt;/span&gt;<span style="color:#FFF"><br/>      </span></span>test<br/>    <span style="color:#0AA">&lt;/h1&gt;<span style="color:#FFF"><br/>  <span style="color:#0AA">&lt;/div&gt;<span style="color:#FFF"><br/><span style="color:#0AA">&lt;/body&gt;<span style="color:#FFF"></span></span></span></span></span></span>
-</div>
-</details>
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					App » 
+					render h1 title
+				</span>
+				<div class="assertion-tags"><span class="tag">accessibility</span><span class="tag">ui</span></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta fail-tests">fail</span>
+				<span class="sr-only">fail</span>
+			</div>
+		</div>
+		<details  open class="assertion-error-details">
+					<summary><p>Error details</p></summary>
+					<div class="assertion-error-content">
+									Unable to find an accessible element with the role &quot;heading&quot;<br/><br/>Here are the accessible roles:<br/><br/>  heading:<br/><br/>  Name &quot;@ test&quot;:<br/>  <span style="color:#0AA">&lt;h1 /&gt;<span style="color:#FFF"><br/><br/>  --------------------------------------------------<br/><br/>Ignored nodes: comments, script, style<br/><span style="color:#0AA">&lt;body&gt;<span style="color:#FFF"><br/>  <span style="color:#0AA">&lt;div&gt;<span style="color:#FFF"><br/>    <span style="color:#0AA">&lt;h1&gt;<span style="color:#FFF"><br/>      <span style="color:#0AA">&lt;span<span style="color:#FFF"><br/>        <span style="color:#A50">style<span style="color:#FFF">=<span style="color:#99C794">&quot;color: rgb(80, 165, 165);&quot;<span style="color:#FFF"><br/>      <span style="color:#0AA">&gt;<span style="color:#FFF"><br/>        </span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>@<br/>      <span style="color:#0AA">&lt;/span&gt;<span style="color:#FFF"><br/>      </span></span>test<br/>    <span style="color:#0AA">&lt;/h1&gt;<span style="color:#FFF"><br/>  <span style="color:#0AA">&lt;/div&gt;<span style="color:#FFF"><br/><span style="color:#0AA">&lt;/body&gt;<span style="color:#FFF"></span></span></span></span></span></span>
+								</div>
+			  </details>
 	</li><li class="assertion status-skip">
-		<span class="assertion-title">
-			App » 
-			this is a skipped test
-		</span>
-		<div class="assertion-tags"><span class="tag">@parsesCustomTagsLikeThis</span></div>
-		<span aria-hidden="true">⏭️</span>
-		<span class="sr-only">skip</span>
-
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					App » 
+					this is a skipped test
+				</span>
+				<div class="assertion-tags"><span class="tag">@parsesCustomTagsLikeThis</span></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta skip-tests">skip</span>
+				<span class="sr-only">skip</span>
+			</div>
+		</div>
+		
 	</li><li class="assertion status-todo">
-		<span class="assertion-title">
-			App » 
-			this is a todo test
-		</span>
-		<div class="assertion-tags"></div>
-		<span aria-hidden="true">🔖</span>
-		<span class="sr-only">todo</span>
-
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					App » 
+					this is a todo test
+				</span>
+				<div class="assertion-tags"></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta todo-tests">todo</span>
+				<span class="sr-only">todo</span>
+			</div>
+		</div>
+		
 	</li><li class="assertion status-fail">
-		<span class="assertion-title">
-			App » 
-			this is a failing test
-		</span>
-		<div class="assertion-tags"><span class="sr-only">convert this to icon</span><span class="tag" aria-hidden="true">🤷🏼</span></div>
-		<span aria-hidden="true">❌</span>
-		<span class="sr-only">fail</span>
-<details open class="assertion-error-details">
- <summary><p>Error details</p></summary>
-<div class="assertion-error-content">
-- Expected<br/>+ Received<br/><br/>- true<br/>+ false
-</div>
-</details>
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					App » 
+					this is a failing test
+				</span>
+				<div class="assertion-tags"><span class="sr-only">convert this to icon</span
+				><span class="tag" aria-hidden="true">🤷🏼</span></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta fail-tests">fail</span>
+				<span class="sr-only">fail</span>
+			</div>
+		</div>
+		<details  open class="assertion-error-details">
+					<summary><p>Error details</p></summary>
+					<div class="assertion-error-content">
+									- Expected<br/>+ Received<br/><br/>- true<br/>+ false
+								</div>
+			  </details>
 	</li>
 		</ul>
 	</div>
-			</details> <details class="test-details">
-				<summary class="test-summary">
+				</details> <details class="test-details">
+					<summary class="test-summary">
 		<div class="test-summary-inner">
-			<h2>common/handlesDifferentTestBlocks.vitest.spec.ts</h2>
-<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/common/handlesDifferentTestBlocks.vitest.spec.ts" rel="noreferrer" target="_blank">Open file</a> 
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
-			<div>
-				<div class="assertion-tags"><span class="tag">unit</span>
-				<div class="test-summary-status">
-		<span aria-hidden="true" class="meta test-summary-skipped-tests">Skip: 2 </span>
-					<span class="sr-only">Skipped tests: 2, </span>
+			<div class="test-summary-primary">
+				<div class="test-summary-title">
+				<h2>common/handlesDifferentTestBlocks.vitest.spec.ts</h2>
+				<span class="open-file"
+							><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/common/handlesDifferentTestBlocks.vitest.spec.ts" rel="noreferrer" target="_blank">Open file</a>
+							
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span
+						>
+				</div>
+				<div class="assertion-tags">
+							<span class="tag">unit</span>
+					  </div>
+			</div>
+			<div class="test-summary-secondary">
+
+			<div class="test-summary-status">
+		<div class="meta skip-tests"><span aria-hidden="true"
+						>Skip: 2
+					</span>
+					<span class="sr-only">Skipped tests: 2, </span></div>
 		
 		
-		<span aria-hidden="true" class="meta test-summary-passing-tests">Pass: 2 </span>
-					<span class="sr-only">Passing tests: 2, </span>
+		<div class="meta pass-tests"><span aria-hidden="true"
+						>Pass: 2
+					</span>
+					<span class="sr-only">Passing tests: 2, </span></div>
 	</div>
 			</div>
 		</div>
 	</summary>
-				<div class="test-assertions">
+					<div class="test-assertions">
 		<ul>
 			<li class="assertion status-pass">
-		<span class="assertion-title">
-			
-			test.each
-		</span>
-		<div class="assertion-tags"><span class="tag">unit</span></div>
-		<span aria-hidden="true">✅</span>
-		<span class="sr-only">pass</span>
-
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					
+					test.each
+				</span>
+				<div class="assertion-tags"><span class="tag">unit</span></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta pass-tests">pass</span>
+				<span class="sr-only">pass</span>
+			</div>
+		</div>
+		
 	</li><li class="assertion status-pass">
-		<span class="assertion-title">
-			
-			test.each
-		</span>
-		<div class="assertion-tags"><span class="tag">unit</span></div>
-		<span aria-hidden="true">✅</span>
-		<span class="sr-only">pass</span>
-
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					
+					test.each
+				</span>
+				<div class="assertion-tags"><span class="tag">unit</span></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta pass-tests">pass</span>
+				<span class="sr-only">pass</span>
+			</div>
+		</div>
+		
 	</li><li class="assertion status-skip">
-		<span class="assertion-title">
-			describe.concurrent » 
-			test.skipIf.each: sum 1 + 1 = 2
-		</span>
-		<div class="assertion-tags"><span class="tag">unit</span></div>
-		<span aria-hidden="true">⏭️</span>
-		<span class="sr-only">skip</span>
-
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					describe.concurrent » 
+					test.skipIf.each: sum 1 + 1 = 2
+				</span>
+				<div class="assertion-tags"><span class="tag">unit</span></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta skip-tests">skip</span>
+				<span class="sr-only">skip</span>
+			</div>
+		</div>
+		
 	</li><li class="assertion status-skip">
-		<span class="assertion-title">
-			describe.concurrent » 
-			test.skipIf.each: sum 3 + 2 = 5
-		</span>
-		<div class="assertion-tags"><span class="tag">unit</span></div>
-		<span aria-hidden="true">⏭️</span>
-		<span class="sr-only">skip</span>
-
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					describe.concurrent » 
+					test.skipIf.each: sum 3 + 2 = 5
+				</span>
+				<div class="assertion-tags"><span class="tag">unit</span></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta skip-tests">skip</span>
+				<span class="sr-only">skip</span>
+			</div>
+		</div>
+		
 	</li>
 		</ul>
 	</div>
-			</details> <details class="test-details">
-				<summary class="test-summary">
+				</details> <details class="test-details">
+					<summary class="test-summary">
 		<div class="test-summary-inner">
-			<h2>Custom title formatting supported</h2>
-<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/Custom title formatting supported" rel="noreferrer" target="_blank">Open file</a> 
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
-			<div>
-				<div class="assertion-tags"><span class="tag">aggregate tags for display in title summary</span>
-				<div class="test-summary-status">
+			<div class="test-summary-primary">
+				<div class="test-summary-title">
+				<h2>Custom title formatting supported</h2>
+				<span class="open-file"
+							><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/Custom title formatting supported" rel="noreferrer" target="_blank">Open file</a>
+							
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span
+						>
+				</div>
+				<div class="assertion-tags">
+							<span class="tag">aggregate tags for display in title summary</span>
+					  </div>
+			</div>
+			<div class="test-summary-secondary">
+
+			<div class="test-summary-status">
 		
 		
 		
-		<span aria-hidden="true" class="meta test-summary-passing-tests">Pass: 1 </span>
-					<span class="sr-only">Passing tests: 1, </span>
+		<div class="meta pass-tests"><span aria-hidden="true"
+						>Pass: 1
+					</span>
+					<span class="sr-only">Passing tests: 1, </span></div>
 	</div>
 			</div>
 		</div>
 	</summary>
-				<div class="test-assertions">
+					<div class="test-assertions">
 		<ul>
 			<li class="assertion status-pass">
-		<span class="assertion-title">
-			common types » 
-			map object so keys are the same as values
-		</span>
-		<div class="assertion-tags"><span class="tag">aggregate tags for display in title summary</span></div>
-		<span aria-hidden="true">✅</span>
-		<span class="sr-only">pass</span>
-
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					common types » 
+					map object so keys are the same as values
+				</span>
+				<div class="assertion-tags"><span class="tag">aggregate tags for display in title summary</span></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta pass-tests">pass</span>
+				<span class="sr-only">pass</span>
+			</div>
+		</div>
+		
 	</li>
 		</ul>
 	</div>
-			</details> <details class="test-details">
-				<summary class="test-summary">
+				</details> <details class="test-details">
+					<summary class="test-summary">
 		<div class="test-summary-inner">
-			<h2>js/commonjs.vitest.spec.cjs</h2>
-<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/commonjs.vitest.spec.cjs" rel="noreferrer" target="_blank">Open file</a> 
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
-			<div>
+			<div class="test-summary-primary">
+				<div class="test-summary-title">
+				<h2>js/commonjs.vitest.spec.cjs</h2>
+				<span class="open-file"
+							><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/commonjs.vitest.spec.cjs" rel="noreferrer" target="_blank">Open file</a>
+							
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span
+						>
+				</div>
 				
-				<div class="test-summary-status">
+			</div>
+			<div class="test-summary-secondary">
+
+			<div class="test-summary-status">
 		
 		
 		
-		<span aria-hidden="true" class="meta test-summary-passing-tests">Pass: 1 </span>
-					<span class="sr-only">Passing tests: 1, </span>
+		<div class="meta pass-tests"><span aria-hidden="true"
+						>Pass: 1
+					</span>
+					<span class="sr-only">Passing tests: 1, </span></div>
 	</div>
 			</div>
 		</div>
 	</summary>
-				<div class="test-assertions">
+					<div class="test-assertions">
 		<ul>
 			<li class="assertion status-pass">
-		<span class="assertion-title">
-			
-			spec.cjs
-		</span>
-		<div class="assertion-tags"><span class="tag">unit</span></div>
-		<span aria-hidden="true">✅</span>
-		<span class="sr-only">pass</span>
-
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					
+					spec.cjs
+				</span>
+				<div class="assertion-tags"><span class="tag">unit</span></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta pass-tests">pass</span>
+				<span class="sr-only">pass</span>
+			</div>
+		</div>
+		
 	</li>
 		</ul>
 	</div>
-			</details> <details class="test-details">
-				<summary class="test-summary">
+				</details> <details class="test-details">
+					<summary class="test-summary">
 		<div class="test-summary-inner">
-			<h2>js/javascript.vitest.spec.js</h2>
-<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/javascript.vitest.spec.js" rel="noreferrer" target="_blank">Open file</a> 
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
-			<div>
+			<div class="test-summary-primary">
+				<div class="test-summary-title">
+				<h2>js/javascript.vitest.spec.js</h2>
+				<span class="open-file"
+							><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/javascript.vitest.spec.js" rel="noreferrer" target="_blank">Open file</a>
+							
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span
+						>
+				</div>
 				
-				<div class="test-summary-status">
+			</div>
+			<div class="test-summary-secondary">
+
+			<div class="test-summary-status">
 		
 		
 		
-		<span aria-hidden="true" class="meta test-summary-passing-tests">Pass: 1 </span>
-					<span class="sr-only">Passing tests: 1, </span>
+		<div class="meta pass-tests"><span aria-hidden="true"
+						>Pass: 1
+					</span>
+					<span class="sr-only">Passing tests: 1, </span></div>
 	</div>
 			</div>
 		</div>
 	</summary>
-				<div class="test-assertions">
+					<div class="test-assertions">
 		<ul>
 			<li class="assertion status-pass">
-		<span class="assertion-title">
-			
-			spec.js
-		</span>
-		<div class="assertion-tags"><span class="tag">unit</span></div>
-		<span aria-hidden="true">✅</span>
-		<span class="sr-only">pass</span>
-
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					
+					spec.js
+				</span>
+				<div class="assertion-tags"><span class="tag">unit</span></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta pass-tests">pass</span>
+				<span class="sr-only">pass</span>
+			</div>
+		</div>
+		
 	</li>
 		</ul>
 	</div>
-			</details> <details class="test-details">
-				<summary class="test-summary">
+				</details> <details class="test-details">
+					<summary class="test-summary">
 		<div class="test-summary-inner">
-			<h2>js/module.vitest.spec.mjs</h2>
-<span class="open-file"><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/module.vitest.spec.mjs" rel="noreferrer" target="_blank">Open file</a> 
-<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span>
-			<div>
+			<div class="test-summary-primary">
+				<div class="test-summary-title">
+				<h2>js/module.vitest.spec.mjs</h2>
+				<span class="open-file"
+							><a href="https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/js/module.vitest.spec.mjs" rel="noreferrer" target="_blank">Open file</a>
+							
+<svg height="12" width="12" aria-label="Link to other website" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M432,288H416a16,16,0,0,0-16,16V458a6,6,0,0,1-6,6H54a6,6,0,0,1-6-6V118a6,6,0,0,1,6-6H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V304A16,16,0,0,0,432,288ZM500,0H364a12,12,0,0,0-8.48,20.48l48.19,48.21L131.51,340.89a12,12,0,0,0,0,17l22.63,22.63a12,12,0,0,0,17,0l272.2-272.21,48.21,48.2A12,12,0,0,0,512,148V12A12,12,0,0,0,500,0Z"></path></svg></span
+						>
+				</div>
 				
-				<div class="test-summary-status">
+			</div>
+			<div class="test-summary-secondary">
+
+			<div class="test-summary-status">
 		
 		
 		
-		<span aria-hidden="true" class="meta test-summary-passing-tests">Pass: 1 </span>
-					<span class="sr-only">Passing tests: 1, </span>
+		<div class="meta pass-tests"><span aria-hidden="true"
+						>Pass: 1
+					</span>
+					<span class="sr-only">Passing tests: 1, </span></div>
 	</div>
 			</div>
 		</div>
 	</summary>
-				<div class="test-assertions">
+					<div class="test-assertions">
 		<ul>
 			<li class="assertion status-pass">
-		<span class="assertion-title">
-			
-			spec.mjs
-		</span>
-		<div class="assertion-tags"><span class="tag">unit</span></div>
-		<span aria-hidden="true">✅</span>
-		<span class="sr-only">pass</span>
-
+		<div class="assertion-details">
+			<div class="assertion-primary">
+				<span class="assertion-title">
+					
+					spec.mjs
+				</span>
+				<div class="assertion-tags"><span class="tag">unit</span></div>
+			</div>
+			<div class="assertion-secondary">
+				<span aria-hidden="true" class="meta pass-tests">pass</span>
+				<span class="sr-only">pass</span>
+			</div>
+		</div>
+		
 	</li>
 		</ul>
 	</div>
-			</details></main>
-				</body>
-			</html>
+				</details>
+				</main>
+			</body>
+		</html>
