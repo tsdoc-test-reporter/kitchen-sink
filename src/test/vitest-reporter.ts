@@ -1,13 +1,13 @@
-
-import TsDocTestReporter from '@tsdoc-test-reporter/vitest';
+import TSDocTestReporter from '@tsdoc-test-reporter/vitest';
 import type { Reporter } from 'vitest/reporters';
-import type { File } from 'vitest';
+import type { File, Vitest } from 'vitest';
 
 export default class CustomReporter implements Reporter {
-	async onFinished(files?: File[]) {
-		new TsDocTestReporter({
+	private reporter: TSDocTestReporter;
+	constructor() {
+		this.reporter =  new TSDocTestReporter({
 			outputFileName: 'reports/index',
-			repoUrl: "https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main/src/",
+			repoUrl: "https://github.com/tsdoc-test-reporter/kitchen-sink/blob/main",
 			customTags: [
 				{
 					tagName: "@parsesCustomTagsLikeThis",
@@ -59,6 +59,14 @@ export default class CustomReporter implements Reporter {
 					return { text: tagText };
 				},
 			},
-		}).onFinished(files);
+		})
+	}
+
+	onInit(ctx: Vitest) {
+		this.reporter.onInit(ctx);
+	}
+
+	onFinished(files?: File[]) {
+		this.reporter.onFinished(files);
 	}
 }
