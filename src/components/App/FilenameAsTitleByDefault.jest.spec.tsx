@@ -26,6 +26,8 @@ describe("App", () => {
    * convert this to icon
    */
   test("this is a failing test", () => {
+    const test = { content: "hello" };
+    console.error(test)
     expect(true).toBeFalsy()
   })
 })

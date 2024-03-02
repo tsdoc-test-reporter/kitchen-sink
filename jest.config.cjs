@@ -71,6 +71,7 @@ module.exports = {
     "^components/(.*)": "<rootDir>/src/components/$1",
     "^common/(.*)": "<rootDir>/src/common/$1",
   },
+  verbose: false,
   setupFilesAfterEnv: ['<rootDir>/src/test/jest-setup.ts'],
   reporters: [
     "default",
