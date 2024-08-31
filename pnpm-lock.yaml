@@ -37,11 +37,11 @@ importers:
         specifier: ^14.5.2
         version: 14.5.2(@testing-library/dom@10.0.0)
       '@tsdoc-test-reporter/jest':
-        specifier: ^0.0.32
-        version: 0.0.32(typescript@5.4.5)
+        specifier: ^0.0.33
+        version: 0.0.33(typescript@5.4.5)
       '@tsdoc-test-reporter/vitest':
-        specifier: ^0.0.32
-        version: 0.0.32(typescript@5.4.5)
+        specifier: ^0.0.33
+        version: 0.0.33(typescript@5.4.5)
       '@types/react':
         specifier: ^18.3.1
         version: 18.3.1
@@ -762,16 +762,16 @@ packages:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
 
-  '@tsdoc-test-reporter/core@0.0.32':
-    resolution: {integrity: sha512-BOVrrERD/YMcoif7TBNJssfcCSzUnyZGFCenEzSPAS5Gq3Zmclt/FGCMQZYBw/9Gi+fNz3JHa8FJZ2B7mlApzQ==}
+  '@tsdoc-test-reporter/core@0.0.33':
+    resolution: {integrity: sha512-5o6E3yhWcaLsTqdCE32b+Ja+r+o8hIfZMeCk0/22PhDuMgCveQt+ou4W8VC5yLG145pLMDKxIgi7C+JhIDOSaw==}
     peerDependencies:
       typescript: '>= 4.4.x <= 5.4.x'
 
-  '@tsdoc-test-reporter/jest@0.0.32':
-    resolution: {integrity: sha512-0C5Q8TOo+vbwbizjJi7l/lKkZ5k/JxAo5PkZ8zJ5+f8NvMz6+VEt43M4UTVGVGvNjrJ7g/tgwIpqbuRT9Ie4EQ==}
+  '@tsdoc-test-reporter/jest@0.0.33':
+    resolution: {integrity: sha512-B9YLmVXmktvRw4JB8zSeo2YlrtYBaxqVrLvdAXmRiExjnMvE7vG2FiljBCeCG9rYNCo1/wuROZXUYV+OIYd8tA==}
 
-  '@tsdoc-test-reporter/vitest@0.0.32':
-    resolution: {integrity: sha512-P8At+NlVyETpewE6Gf1+mIeKPkZ++5XqjIqgrblVe2AAwJOyQ/qdeUH4AVbLYZu3TANl/pkEz6hhyzal/Smd4g==}
+  '@tsdoc-test-reporter/vitest@0.0.33':
+    resolution: {integrity: sha512-20ZDMygaQYOh5zNwsUTGN+PB2xfpXddsRNZFiroWTGsUn/Dv3m8rWI3D84V9zbZup781KUapAJP9e8/qxLfAMw==}
 
   '@types/aria-query@5.0.2':
     resolution: {integrity: sha512-PHKZuMN+K5qgKIWhBodXzQslTo5P+K/6LqeKXS6O/4liIDdZqaX5RXrCK++LAw+y/nptN48YmUMFiQHRSWYwtQ==}
@@ -2406,6 +2406,9 @@ packages:
       typescript:
         optional: true
 
+  tslib@2.7.0:
+    resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
+
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
@@ -3322,26 +3325,27 @@ snapshots:
 
   '@tootallnate/once@2.0.0': {}
 
-  '@tsdoc-test-reporter/core@0.0.32(typescript@5.4.5)':
+  '@tsdoc-test-reporter/core@0.0.33(typescript@5.4.5)':
     dependencies:
       '@microsoft/tsdoc': 0.14.2
+      tslib: 2.7.0
       typescript: 5.4.5
 
-  '@tsdoc-test-reporter/jest@0.0.32(typescript@5.4.5)':
+  '@tsdoc-test-reporter/jest@0.0.33(typescript@5.4.5)':
     dependencies:
       '@jest/reporters': 29.7.0
       '@jest/test-result': 29.7.0
       '@microsoft/tsdoc': 0.14.2
-      '@tsdoc-test-reporter/core': 0.0.32(typescript@5.4.5)
+      '@tsdoc-test-reporter/core': 0.0.33(typescript@5.4.5)
     transitivePeerDependencies:
       - node-notifier
       - supports-color
       - typescript
 
-  '@tsdoc-test-reporter/vitest@0.0.32(typescript@5.4.5)':
+  '@tsdoc-test-reporter/vitest@0.0.33(typescript@5.4.5)':
     dependencies:
       '@microsoft/tsdoc': 0.14.2
-      '@tsdoc-test-reporter/core': 0.0.32(typescript@5.4.5)
+      '@tsdoc-test-reporter/core': 0.0.33(typescript@5.4.5)
     transitivePeerDependencies:
       - typescript
 
@@ -5251,6 +5255,8 @@ snapshots:
   tsconfck@3.0.3(typescript@5.4.5):
     optionalDependencies:
       typescript: 5.4.5
+
+  tslib@2.7.0: {}
 
   type-check@0.4.0:
     dependencies:
